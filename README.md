@@ -1,5 +1,5 @@
-Start Server
-------------
+Express Error Handling Demo
+---------------------------
 
 ```
 npm install
@@ -13,7 +13,7 @@ Documents
 Some important concepts
 -----------------------
 
-### About route handler:
+### 1. route handler:
 
 A function has 2 or 3 parameters:
 
@@ -23,7 +23,7 @@ app.use(function(req, res) {})
 app.use(function(req, res, next) {})
 ```
 
-### About error handler
+### 2. error handler
 
 ```
 app.use(function(err, req, res, next) {
@@ -33,11 +33,13 @@ app.use(function(err, req, res, next) {
 
 It must have 4 parameters(the first one is an error some previous handlers)
 
-### About `next`:
+### 3. `next`:
 
 1. `next()` means to go into next route handler (not error handler)
 1. `next('route')` means to skip all the later route handlers, and it's not an error
 1. `next(otherValue)` means go to error handlers
+
+---
 
 1. The normal way to handle errors in express
 ---------------------------------------------
@@ -57,8 +59,6 @@ curl http://localhost:3000
 node not-using-error-handler.js
 ```
 
-Visit: 
-
 ```
 curl http://localhost:3000/
 ```
@@ -72,23 +72,9 @@ node default-error-handler.js
 
 Errors will be logged on server side and also be sent to client.
 
-### Custom string error
-
-```
-curl http://localhost:3000/custom-error
-```
-
-### File error
-
-```
-curl http://localhost:3000/file-error
-```
-
-### `throw err` will kill the server
-
-```
-curl http://localhost:3000/throw-error
-```
+- Custom string error: `curl http://localhost:3000/custom-error`
+- File error: `curl http://localhost:3000/file-error`
+- `throw err` will kill the server: `curl http://localhost:3000/throw-error` 
 
 4. Custom error handler
 -----------------------
@@ -97,11 +83,19 @@ curl http://localhost:3000/throw-error
 node custom-error-handler.js
 ```
 
+```
+curl http://localhost:3000
+```
+
 5. Log error stack
 ------------------
 
 ```
 node error-stack.js
+```
+
+```
+curl http://localhost:3000
 ```
 
 6. Multiple error handlers
